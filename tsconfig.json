@@ -1,0 +1,3 @@
+{
+  "extends": "@imccausl/dev/tsconfig.json"
+}

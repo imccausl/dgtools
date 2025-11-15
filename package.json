@@ -1,4 +1,26 @@
 {
-  "name": "leaderboard",
-  "packageManager": "yarn@4.11.0"
+  "name": "udisc-leaderboard",
+  "description": "Scrapes data from Udisc and creates a leadboard",
+  "packageManager": "yarn@4.11.0",
+  "type": "module",
+  "devDependencies": {
+    "@imccausl/dev": "^2.1.3",
+    "@types/cheerio": "^1.0.0",
+    "@types/luxon": "^3.7.1",
+    "@types/node": "^24.10.1",
+    "@types/xlsx": "^0.0.36",
+    "@typescript-eslint/parser": "^8.46.4",
+    "@yarnpkg/sdks": "^3.2.3",
+    "eslint": "^9.39.1",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vitest": "^4.0.9"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "luxon": "^3.7.2",
+    "xlsx": "^0.18.5"
+  }
 }
