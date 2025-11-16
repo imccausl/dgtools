@@ -1,67 +1,124 @@
-import { BASE_URL, EVENTS_PATH } from '../../constants/index.js'
-import { convertExcelToJSON } from '../excel/index.js'
-import { buildQueryParams } from '../query.js'
+const EventTypes = {
+  LEAGUE: 'league',
+  CLINIC: 'clinic',
+  CLEANUP: 'clean-up',
+  NON_DG: 'non-dg',
+} as const
 
-import { getEvents, getLatestEvent } from './event.js'
+const TagTypes = {
+  GLOW: 'glow-round',
+  ACE_POOL: 'ace-pool',
+  CHARITY: 'charity',
+  FEMALE_FRIENDLY: 'female-friendly',
+  BEGINNER_FRIENDLY: 'beginner-friendly',
+  JUNIOR_FRIENDLY: 'junior-friendly',
+  BAG_TAGS: 'bag-tags',
+} as const
 
-import type { Query } from '../../constants/query.js'
+const QuickFilters = {
+  ALL: 'all',
+  MY_EVENTS: 'my-events',
+  TRENDING: 'trending',
+  TOURNAMENT: 'tournament',
+  LEAGUE: 'league',
+  PDGA: 'pdga',
+  CLEANUP: 'course-cleanup',
+  GLOW: 'glow',
+  CLINICS: 'clinics',
+  WOMENS: 'women',
+  CHARITY: 'charity',
+} as const
 
-class UDiscEventsQuery {
-  #query: Query
-  #events: Promise<ReturnType<typeof getEvents>>
+type QuickFilters = (typeof QuickFilters)[keyof typeof QuickFilters]
+type EventTypes = (typeof EventTypes)[keyof typeof EventTypes]
+type TagTypes = (typeof TagTypes)[keyof typeof TagTypes]
 
-  constructor(query: Query) {
-    this.#query = query
-    this.#events = this.#fetchEvents()
-  }
-
-  async #fetchUrl(url: string) {
-    const response = await fetch(url)
-    if (!response.ok) {
-      throw new Error(
-        `Failed to fetch UDisc events: ${response.status} ${response.statusText}`,
-      )
-    }
-    return response
-  }
-
-  async #fetchEvents() {
-    const url = this.#getUrl()
-    const response = await this.#fetchUrl(url)
-    return getEvents(await response.text())
-  }
-
-  async #fetchLeaderboard(exportUrl: string) {
-    const response = await this.#fetchUrl(exportUrl)
-    const arrayBuffer = await response.arrayBuffer()
-    return convertExcelToJSON(arrayBuffer)
-  }
-
-  #getUrl() {
-    const queryParams = buildQueryParams(this.#query)
-    return `${BASE_URL}${EVENTS_PATH}?${queryParams}`
-  }
-
-  async events() {
-    return this.#events
-  }
-
-  async latestEvent() {
-    const events = await this.#events
-    return getLatestEvent(events)
-  }
-
-  async leaderboard(url: string) {
-    return this.#fetchLeaderboard(url)
-  }
-
-  async latestLeaderboard() {
-    const latestEvent = await this.latestEvent()
-    if (!latestEvent?.url) {
-      throw new Error('No latest event or leaderboard URL found.')
-    }
-    return this.#fetchLeaderboard(latestEvent.url)
-  }
+// https://udisc.com/events?quickFilter=all&query=LDGA&latitude=42.973710821002705&longitude=-81.25013211646032&searchRadius=80.45&type=league&dates=custom&endsOnOrAfter=2025-11-08&startsOnOrBefore=2025-12-10
+type BaseQuery = {
+  query?: string
+  latitude?: number
+  longitude?: number
+  searchRadius?: number
+  quickFilter?: QuickFilters
+  type?: EventTypes[]
+  tag?: TagTypes[]
+  handicapScoring?: boolean
+  // 'upcoming' is implied by absence of dates
+  // if dates is 'custom', dateDuration is not present
+  // but endsOnOrAfter and startsOnOrBefore are required
+  dates?: 'custom' | 'past'
+  // 'all' is implied by absence of dateDuration
+  // dateDuration is not present if dates is 'custom'
+  dateDuration?: 'day' | 'week' | 'month'
+  endsOnOrAfter?: string
+  startsOnOrBefore?: string
 }
 
-export { UDiscEventsQuery }
+type CustomDateQuery = BaseQuery & {
+  dates: 'custom'
+  endsOnOrAfter: string
+  startsOnOrBefore: string
+  dateDuration?: never
+}
+
+export type Query = BaseQuery | CustomDateQuery
+
+function buildQueryParams(params: Query) {
+  const queryParams = new URLSearchParams()
+
+  if (params.query) {
+    queryParams.append('query', params.query)
+  }
+
+  if (params.latitude !== undefined) {
+    queryParams.append('latitude', params.latitude.toString())
+  }
+
+  if (params.longitude !== undefined) {
+    queryParams.append('longitude', params.longitude.toString())
+  }
+
+  if (params.searchRadius !== undefined) {
+    queryParams.append('searchRadius', params.searchRadius.toString())
+  }
+
+  if (params.quickFilter) {
+    queryParams.append('quickFilter', params.quickFilter)
+  }
+
+  if (params.type) {
+    for (const type of params.type) {
+      queryParams.append('type', type)
+    }
+  }
+
+  if (params.tag) {
+    for (const tag of params.tag) {
+      queryParams.append('tag', tag)
+    }
+  }
+
+  if (params.handicapScoring) {
+    queryParams.append('handicapScoring', '1')
+  }
+
+  if (params.dates) {
+    queryParams.append('dates', params.dates)
+  }
+
+  if (params.dateDuration) {
+    queryParams.append('dateDuration', params.dateDuration)
+  }
+
+  if (params.startsOnOrBefore) {
+    queryParams.append('startsOnOrBefore', params.startsOnOrBefore)
+  }
+
+  if (params.endsOnOrAfter) {
+    queryParams.append('endsOnOrAfter', params.endsOnOrAfter)
+  }
+
+  return queryParams.toString()
+}
+
+export { buildQueryParams, EventTypes, TagTypes, QuickFilters }

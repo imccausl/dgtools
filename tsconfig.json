@@ -1,3 +1,6 @@
 {
-  "extends": "@imccausl/dev/tsconfig.json"
+  "extends": "@imccausl/dev/tsconfig.json",
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  }
 }
