@@ -1,0 +1,77 @@
+name: Test and Build
+
+on:
+  workflow_call:
+
+jobs:
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Prepare Env
+        uses: ./.github/actions/prepare-env
+
+      - name: format
+        run: yarn format --check
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Prepare Env
+        uses: ./.github/actions/prepare-env
+
+      - name: lint
+        run: yarn lint
+
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Prepare Env
+        uses: ./.github/actions/prepare-env
+
+      - name: lint
+        run: yarn typecheck
+
+  build:
+    name: Build
+    # needs: [lint, typecheck]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Prepare Env
+        uses: ./.github/actions/prepare-env
+
+      - name: Cache build
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: lib
+          key: lib-${{ hashFiles('**/yarn.lock', '**/package.json', '**/src/**/*') }}
+
+      - name: Build
+        run: |
+          yarn build

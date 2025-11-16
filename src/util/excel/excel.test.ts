@@ -4,12 +4,17 @@ import { convertExcelToJSON } from './index.js'
 
 function workbookToArrayBuffer(workbook: XLSX.WorkBook) {
   const buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' })
-  return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength)
+  return buffer.buffer.slice(
+    buffer.byteOffset,
+    buffer.byteOffset + buffer.byteLength,
+  )
 }
 
 function createWorkbookFromRows(rows: Record<string, string | null>[]) {
   const worksheet =
-    rows.length > 0 ? XLSX.utils.json_to_sheet(rows) : XLSX.utils.aoa_to_sheet([])
+    rows.length > 0
+      ? XLSX.utils.json_to_sheet(rows)
+      : XLSX.utils.aoa_to_sheet([])
   const workbook = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
   return workbookToArrayBuffer(workbook)
