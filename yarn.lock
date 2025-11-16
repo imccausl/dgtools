@@ -5996,29 +5996,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"leaderboard@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "leaderboard@workspace:."
-  dependencies:
-    "@imccausl/dev": "npm:^2.1.3"
-    "@types/cheerio": "npm:^1.0.0"
-    "@types/luxon": "npm:^3.7.1"
-    "@types/node": "npm:^24.10.1"
-    "@types/xlsx": "npm:^0.0.36"
-    "@typescript-eslint/parser": "npm:^8.46.4"
-    "@yarnpkg/sdks": "npm:^3.2.3"
-    cheerio: "npm:^1.1.2"
-    eslint: "npm:^9.39.1"
-    luxon: "npm:^3.7.2"
-    prettier: "npm:^3.6.2"
-    tsx: "npm:^4.20.6"
-    typescript: "npm:^5.9.3"
-    vite: "npm:^7.2.2"
-    vitest: "npm:^4.0.9"
-    xlsx: "npm:^0.18.5"
-  languageName: unknown
-  linkType: soft
-
 "levn@npm:^0.4.1":
   version: 0.4.1
   resolution: "levn@npm:0.4.1"
@@ -9248,6 +9225,29 @@ __metadata:
   checksum: 10c0/ad09fdf7a756814dce65bc60c1657b40d44451346858eea230e10f2e95a289d9183b6e32e5c11e95acc0ccc214b4f36289dcad4bf1886b0adb84d711d336a430
   languageName: node
   linkType: hard
+
+"udisc-leaderboard@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "udisc-leaderboard@workspace:."
+  dependencies:
+    "@imccausl/dev": "npm:^2.1.3"
+    "@types/cheerio": "npm:^1.0.0"
+    "@types/luxon": "npm:^3.7.1"
+    "@types/node": "npm:^24.10.1"
+    "@types/xlsx": "npm:^0.0.36"
+    "@typescript-eslint/parser": "npm:^8.46.4"
+    "@yarnpkg/sdks": "npm:^3.2.3"
+    cheerio: "npm:^1.1.2"
+    eslint: "npm:^9.39.1"
+    luxon: "npm:^3.7.2"
+    prettier: "npm:^3.6.2"
+    tsx: "npm:^4.20.6"
+    typescript: "npm:^5.9.3"
+    vite: "npm:^7.2.2"
+    vitest: "npm:^4.0.9"
+    xlsx: "npm:^0.18.5"
+  languageName: unknown
+  linkType: soft
 
 "uglify-js@npm:^3.1.4":
   version: 3.19.3

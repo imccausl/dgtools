@@ -1,4 +1,17 @@
-const UDISC_EVENTS_URL =
-  'https://udisc.com/events?quickFilter=all&latitude=42.97357639466181&longitude=-81.24997164303655&searchRadius=40.225&type=league&dates=past'
+const BASE_URL = 'https://udisc.com'
+const EVENTS_PATH = '/events'
 
-export { UDISC_EVENTS_URL }
+export { EVENTS_PATH, BASE_URL }
+
+/*
+
+const query = new UDiscQuery({
+  latitude: 34.0522,
+  longitude: -118.2437,
+  searchRadius: 50,
+  quickFilter: QuickFilters.LEAGUE,
+  query: 'LDGA Weekend League',
+})
+
+
+*/
