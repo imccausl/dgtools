@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+
 import './leaderboard.css'
 
 export function useLeaderboardQuery(query: string) {
@@ -35,6 +36,19 @@ export function Leaderboard() {
       </div>
     )
 
+  const leaderboard = data?.leaderboard
+  const event = data?.event
+  const eventDate = new Date(event?.date || '')
+  let formattedEventDate = ''
+  if (eventDate instanceof Date && !isNaN(eventDate.getTime())) {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }
+    formattedEventDate = eventDate.toLocaleDateString(undefined, options)
+  }
+
   return (
     <section className="udl-card" aria-live="polite">
       <header className="udl-card__hero">
@@ -42,8 +56,8 @@ export function Leaderboard() {
           🏆
         </div>
         <div>
-          <h2 className="udl-card__title">Winter League Finals</h2>
-          <p className="udl-card__meta">March 16, 2025 • River’s Edge</p>
+          <h2 className="udl-card__title">{event?.name}</h2>
+          <p className="udl-card__meta">{formattedEventDate}</p>
         </div>
       </header>
 
@@ -57,7 +71,7 @@ export function Leaderboard() {
           </tr>
         </thead>
         <tbody>
-          {data?.map((entry: any) => {
+          {leaderboard?.map((entry: any) => {
             const [first, last] = entry.name.split(' ')
             const relative =
               entry.event_relative_score === 0
