@@ -4,6 +4,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./config/tests/msw.ts'],
+    setupFiles: ['config/tests/msw.ts'],
   },
 })

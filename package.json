@@ -1,21 +1,27 @@
 {
-  "name": "@imccausl/udisc",
-  "description": "Utilities for querying UDisc data",
-  "version": "0.0.1",
+  "name": "udisc-monorepo",
+  "version": "0.0.0",
+  "private": true,
   "packageManager": "yarn@4.11.0",
-  "type": "module",
-  "files": [
-    "lib"
+  "description": "Monorepo for the UDisc utilities packages",
+  "workspaces": [
+    "packages/*"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "turbo run build",
+    "format": "turbo run format",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "publish": "turbo run publish",
+    "workspace:build": "cd $INIT_CWD && dev lib",
+    "workspace:format": "cd $INIT_CWD && dev format",
+    "workspace:lint": "cd $INIT_CWD && dev lint",
+    "workspace:typecheck": "cd $INIT_CWD && tsc --noEmit",
+    "workspace:test": "cd $INIT_CWD && dev test"
+  },
   "devDependencies": {
-    "@imccausl/dev": "^2.1.5",
-    "@types/cheerio": "^1.0.0",
-    "@types/jsdom": "^27",
-    "@types/luxon": "^3.7.1",
-    "@types/node": "^24.10.1",
-    "@types/xlsx": "^0.0.36",
+    "@imccausl/dev": "^2.3.0",
     "@typescript-eslint/parser": "^8.46.4",
     "@yarnpkg/sdks": "^3.2.3",
     "eslint": "^9.39.1",
@@ -23,21 +29,7 @@
     "msw": "^2.12.2",
     "prettier": "^3.6.2",
     "tsx": "^4.20.6",
-    "typescript": "^5.9.3",
-    "vite": "^7.2.2",
-    "vitest": "^4.0.9"
-  },
-  "dependencies": {
-    "cheerio": "^1.1.2",
-    "luxon": "^3.7.2",
-    "xlsx": "^0.18.5"
-  },
-  "scripts": {
-    "build": "yarn dev lib",
-    "format": "yarn dev format",
-    "publish": "yarn dev release",
-    "lint": "yarn dev lint",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "turbo": "^2.2.4",
+    "typescript": "^5.9.3"
   }
 }
