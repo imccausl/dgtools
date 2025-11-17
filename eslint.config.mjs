@@ -1,3 +1,8 @@
 import eslintConfig from '@imccausl/dev/eslint-config'
 
-export default eslintConfig
+export default [
+  {
+    ignores: ['**/lib/**', '**/node_modules/**'],
+  },
+  ...eslintConfig,
+]

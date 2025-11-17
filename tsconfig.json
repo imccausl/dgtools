@@ -1,6 +1,21 @@
 {
-  "extends": "@imccausl/dev/tsconfig.json",
   "compilerOptions": {
-    "types": ["vitest/globals"]
-  }
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2020"],
+    "rootDir": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true
+  },
+  "files": [],
+  "include": ["eslint.config.mjs"],
+  "references": [{ "path": "./packages/udisc" }]
 }
