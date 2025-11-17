@@ -18,9 +18,11 @@
     "workspace:format": "cd $INIT_CWD && dev format",
     "workspace:lint": "cd $INIT_CWD && dev lint",
     "workspace:typecheck": "cd $INIT_CWD && tsc --noEmit",
-    "workspace:test": "cd $INIT_CWD && dev test"
+    "workspace:test": "cd $INIT_CWD && dev test",
+    "publish-packages": "changeset version && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@imccausl/dev": "^2.3.0",
     "@typescript-eslint/parser": "^8.46.4",
     "@yarnpkg/sdks": "^3.2.3",
