@@ -1,5 +1,11 @@
 # @imccausl/udisc-events
 
+## 0.1.0
+
+### Minor Changes
+
+- 71daac5: adds event information and leaderboard url to leaderboard data
+
 ## 0.0.5
 
 ### Patch Changes
