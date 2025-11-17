@@ -31,16 +31,25 @@ export function Leaderboard() {
           <th>Rank</th>
           <th>Name</th>
           <th>Score</th>
+          <th>Round</th>
         </tr>
       </thead>
       <tbody>
-        {data?.map((entry: any) => (
-          <tr key={entry.Rank}>
-            <td>{entry.Rank}</td>
-            <td>{entry.Name}</td>
-            <td>{entry.Score}</td>
-          </tr>
-        ))}
+        {data?.map((entry: any) => {
+          const [firstName, lastName] = entry.name.split(' ')
+          const relativeScore =
+            entry.event_relative_score === 0
+              ? 'E'
+              : `${entry.event_relative_score > 0 ? '+' : ''}${entry.event_relative_score}`
+          return (
+            <tr key={entry.username}>
+              <td>{entry.position}</td>
+              <td>{`${firstName} ${(lastName?.[0] ?? '').toUpperCase()}`}</td>
+              <td>{relativeScore}</td>
+              <td>{entry.round_total_score}</td>
+            </tr>
+          )
+        })}
       </tbody>
     </table>
   )
