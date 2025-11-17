@@ -10,4 +10,12 @@ function getLeaderboardExportURL(href: string | undefined) {
   return `${baseHref.replace(/\/$/, '')}${EXPORT_PATH}`
 }
 
-export { getLeaderboardExportURL }
+function getLeaderboardPageURL(href: string | undefined) {
+  if (!href) return null
+
+  const absoluteHref = new URL(href, BASE_URL).href
+  const [baseHref] = absoluteHref.split('??')
+  return `${baseHref.replace(/\/$/, '')}/leaderboard`
+}
+
+export { getLeaderboardExportURL, getLeaderboardPageURL }

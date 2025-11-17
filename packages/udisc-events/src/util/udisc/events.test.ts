@@ -13,15 +13,18 @@ describe('getEvents', () => {
       {
         date: '2025-11-09',
         day: 'sun',
-        leaderboardExportUrl:
+        exportUrl:
           'https://udisc.com/events/2025-wdgc-sunday-IRjyLb/leaderboard/export',
+        pageUrl: 'https://udisc.com/events/2025-wdgc-sunday-IRjyLb/leaderboard',
         name: '2025 WDGC Sunday',
       },
       {
         date: '2025-11-08',
         day: 'sat',
-        leaderboardExportUrl:
+        exportUrl:
           'https://udisc.com/events/ldga-weekend-league-ldga-weekend-league-finals-OkaV4J/leaderboard/export',
+        pageUrl:
+          'https://udisc.com/events/ldga-weekend-league-ldga-weekend-league-finals-OkaV4J/leaderboard',
         name: 'LDGA Weekend League Finals',
       },
     ])
@@ -35,19 +38,22 @@ describe('getLatestEvent', () => {
         name: 'Event 1',
         date: '2023-01-01',
         day: 'sun',
-        leaderboardExportUrl: null,
+        exportUrl: null,
+        pageUrl: null,
       },
       {
         name: 'Event 2',
         date: '2023-02-15',
         day: 'wed',
-        leaderboardExportUrl: null,
+        exportUrl: null,
+        pageUrl: null,
       },
       {
         name: 'Event 3',
         date: '2022-12-31',
         day: 'sat',
-        leaderboardExportUrl: null,
+        exportUrl: null,
+        pageUrl: null,
       },
     ]
 
