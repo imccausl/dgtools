@@ -1,20 +1,38 @@
 {
   "name": "@imccausl/udisc-events",
-  "description": "Utilities for querying UDisc data",
-  "version": "0.0.1",
+  "description": "An interface for querying udisc event data",
+  "version": "0.0.5",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imccausl/udisc.git"
+  },
   "files": [
     "lib"
   ],
-  "main": "src/index.ts",
+  "main": "lib/index.mjs",
+  "types": "lib/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./lib/index.mjs",
+        "types": "./lib/index.d.mts"
+      },
+      "require": {
+        "default": "./lib/index.cjs",
+        "types": "./lib/index.d.cts"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "publishConfig": {
-    "main": "lib/index.js",
-    "types": "lib/index.d.ts"
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest",
+    "access": "public"
   },
   "scripts": {
-    "build": "yarn workspace:build",
+    "build": "yarn workspace:build --format cjs,esm",
     "format": "yarn workspace:format",
-    "publish": "yarn dev release",
     "lint": "yarn workspace:lint",
     "typecheck": "yarn workspace:typecheck",
     "test": "yarn workspace:test"

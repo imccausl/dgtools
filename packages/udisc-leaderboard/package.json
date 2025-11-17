@@ -20,7 +20,8 @@
     "test": "yarn workspace:test"
   },
   "dependencies": {
-    "@imccausl/udisc-events": "*"
+    "@imccausl/udisc-events": "*",
+    "axios": "^1.13.2"
   },
   "devDependencies": {
     "@storybook/react": "^10.0.8",

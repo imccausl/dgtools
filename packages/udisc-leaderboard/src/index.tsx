@@ -1,18 +1,14 @@
-import { EventsQuery } from '@imccausl/udisc-events'
 import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 
 export function useLeaderboardQuery(query: string) {
   return useQuery({
     queryKey: ['leaderboard', query],
     queryFn: async () => {
-      const eventsQuery = new EventsQuery({
-        query,
-        type: ['league'],
-        dates: 'custom',
-        startsOnOrBefore: '2025-12-10',
-        endsOnOrAfter: '2025-11-08',
-      })
-      return eventsQuery.latestLeaderboard()
+      const response = await axios.get(
+        'https://api.ud.dgtools.dev/events/leaderboard/latest?quickFilter=league&latitude=42.97361108241227&longitude=-81.24997617076032&searchRadius=50&dates=past&dateDuration=month&query=ldga',
+      )
+      return response.data
     },
   })
 }

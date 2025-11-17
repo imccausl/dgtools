@@ -20,9 +20,11 @@
     "workspace:typecheck": "cd $INIT_CWD && tsc --noEmit",
     "workspace:test": "cd $INIT_CWD && dev test",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "publish-packages": "changeset version && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@chromatic-com/storybook": "^4.1.2",
     "@imccausl/dev": "^2.3.0",
     "@storybook/addon-a11y": "^10.0.8",
