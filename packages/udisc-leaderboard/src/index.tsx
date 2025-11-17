@@ -19,7 +19,11 @@ export function Leaderboard() {
 
   if (isLoading)
     return (
-      <div className="udl-card udl-card--loading" role="status" aria-live="polite">
+      <div
+        className="udl-card udl-card--loading"
+        role="status"
+        aria-live="polite"
+      >
         <span className="udl-spinner" aria-hidden="true" />
         <span className="udl-loading-text">Loading leaderboard…</span>
       </div>
@@ -49,7 +53,7 @@ export function Leaderboard() {
             <th scope="col">Pos</th>
             <th scope="col">Player</th>
             <th scope="col">Score</th>
-            <th scope="col">Rounds</th>
+            <th scope="col">Round</th>
           </tr>
         </thead>
         <tbody>
