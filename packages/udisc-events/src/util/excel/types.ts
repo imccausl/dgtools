@@ -1,4 +1,4 @@
 export interface XLSXParser {
-  convert(): void
+  convert(): unknown
   set data(data: ArrayBuffer)
 }
