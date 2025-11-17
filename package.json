@@ -16,7 +16,9 @@
     "publish": "turbo run publish",
     "workspace:build": "cd $INIT_CWD && dev lib",
     "workspace:format": "cd $INIT_CWD && dev format",
-    "workspace:lint": "cd $INIT_CWD && dev lint"
+    "workspace:lint": "cd $INIT_CWD && dev lint",
+    "workspace:typecheck": "cd $INIT_CWD && tsc --noEmit",
+    "workspace:test": "cd $INIT_CWD && dev test"
   },
   "devDependencies": {
     "@imccausl/dev": "^2.3.0",
@@ -28,8 +30,6 @@
     "prettier": "^3.6.2",
     "tsx": "^4.20.6",
     "turbo": "^2.2.4",
-    "typescript": "^5.9.3",
-    "vite": "^7.2.2",
-    "vitest": "^4.0.9"
+    "typescript": "^5.9.3"
   }
 }

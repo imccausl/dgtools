@@ -17,5 +17,5 @@
   },
   "files": [],
   "include": ["eslint.config.mjs"],
-  "references": [{ "path": "./packages/udisc" }]
+  "references": [{ "path": "./packages/udisc-events" }]
 }

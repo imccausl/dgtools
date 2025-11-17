@@ -13,25 +13,17 @@
     "format": "yarn workspace:format",
     "publish": "yarn dev release",
     "lint": "yarn workspace:lint",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "typecheck": "yarn workspace:typecheck",
+    "test": "yarn workspace:test"
   },
   "devDependencies": {
     "@types/cheerio": "^1.0.0",
     "@types/jsdom": "^27",
     "@types/luxon": "^3.7.1",
-    "@types/node": "^24.10.1",
     "@types/xlsx": "^0.0.36",
-    "@typescript-eslint/parser": "^8.46.4",
-    "@yarnpkg/sdks": "^3.2.3",
-    "eslint": "^9.39.1",
     "jsdom": "^27.2.0",
     "msw": "^2.12.2",
-    "prettier": "^3.6.2",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3",
-    "vite": "^7.2.2",
-    "vitest": "^4.0.9"
+    "vitest": "^4.0.10"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
