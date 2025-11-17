@@ -56,10 +56,14 @@ class EventsQuery {
 
   async latestLeaderboard() {
     const latestEvent = await this.latestEvent()
-    if (!latestEvent?.leaderboardExportUrl) {
+    if (!latestEvent?.exportUrl) {
       throw new Error('No latest event or leaderboard URL found.')
     }
-    return this.#fetchLeaderboard(latestEvent.leaderboardExportUrl)
+    const leaderboard = await this.#fetchLeaderboard(latestEvent.exportUrl)
+    return {
+      event: latestEvent,
+      leaderboard: leaderboard,
+    }
   }
 }
 

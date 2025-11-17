@@ -1,13 +1,17 @@
 import { load } from 'cheerio'
 import { DateTime } from 'luxon'
 
-import { getLeaderboardExportURL } from './leaderboard.js'
+import {
+  getLeaderboardExportURL,
+  getLeaderboardPageURL,
+} from './leaderboard.js'
 
 type Event = {
   name: string
   date: string | null
   day: string | null
-  leaderboardExportUrl: string | null
+  exportUrl: string | null
+  pageUrl: string | null
 }
 
 const EVENT_LINK_SELECTOR = "a[href*='/events/']"
@@ -36,12 +40,14 @@ function getEvents(html: string, options: { query?: string } = {}): Event[] {
       const day = getDay(date)
       const href = $(el).attr('href')
       const leaderboardExportUrl = getLeaderboardExportURL(href)
+      const leaderboardPageUrl = getLeaderboardPageURL(href)
 
       return {
         name,
         date: date.toISODate(),
         day,
-        leaderboardExportUrl,
+        exportUrl: leaderboardExportUrl,
+        pageUrl: leaderboardPageUrl,
       }
     })
     .toArray()

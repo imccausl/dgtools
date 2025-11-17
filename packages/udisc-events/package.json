@@ -10,17 +10,17 @@
   "files": [
     "lib"
   ],
-  "main": "lib/index.mjs",
   "types": "lib/index.d.mts",
+  "main": "lib/index.mjs",
   "exports": {
     ".": {
       "import": {
-        "default": "./lib/index.mjs",
-        "types": "./lib/index.d.mts"
+        "types": "./lib/index.d.mts",
+        "default": "./lib/index.mjs"
       },
       "require": {
-        "default": "./lib/index.cjs",
-        "types": "./lib/index.d.cts"
+        "types": "./lib/index.d.cts",
+        "default": "./lib/index.cjs"
       }
     },
     "./package.json": "./package.json"
