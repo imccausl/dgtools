@@ -39,7 +39,6 @@
   "scripts": {
     "build": "yarn workspace:build --format cjs,esm",
     "format": "yarn workspace:format",
-    "publish": "yarn dev release",
     "lint": "yarn workspace:lint",
     "typecheck": "yarn workspace:typecheck",
     "test": "yarn workspace:test"
