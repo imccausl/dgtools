@@ -12,6 +12,8 @@ type Event = {
   day: string | null
   exportUrl: string | null
   pageUrl: string | null
+  courseName: string | null
+  location: string | null
 }
 
 const EVENT_LINK_SELECTOR = "a[href*='/events/']"
@@ -19,6 +21,26 @@ const EVENT_LINK_SELECTOR = "a[href*='/events/']"
 function getDay(date: DateTime) {
   const dayStrings = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
   return dayStrings[date.weekday - 1] ?? null
+}
+
+function parseCourseDetails(text: string) {
+  if (!text) {
+    return { courseName: null, location: null }
+  }
+
+  const [courseNamePart, ...locationParts] = text
+    .split('•')
+    .map((part) => part.trim())
+
+  const courseName = courseNamePart || null
+
+  let location: string | null = null
+  if (locationParts.length > 0) {
+    const locationText = locationParts.join(' • ').trim()
+    location = locationText ? locationText : null
+  }
+
+  return { courseName, location }
 }
 
 function getEvents(html: string, options: { query?: string } = {}): Event[] {
@@ -41,6 +63,13 @@ function getEvents(html: string, options: { query?: string } = {}): Event[] {
       const href = $(el).attr('href')
       const leaderboardExportUrl = getLeaderboardExportURL(href)
       const leaderboardPageUrl = getLeaderboardPageURL(href)
+      const locationContainer = $(el).find('.fa-location-dot').parent()
+      const locationText = locationContainer
+        .find('.font-normal')
+        .first()
+        .text()
+        .trim()
+      const { courseName, location } = parseCourseDetails(locationText)
 
       return {
         name,
@@ -48,6 +77,8 @@ function getEvents(html: string, options: { query?: string } = {}): Event[] {
         day,
         exportUrl: leaderboardExportUrl,
         pageUrl: leaderboardPageUrl,
+        courseName,
+        location,
       }
     })
     .toArray()
