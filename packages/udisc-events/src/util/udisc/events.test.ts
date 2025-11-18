@@ -17,6 +17,8 @@ describe('getEvents', () => {
           'https://udisc.com/events/2025-wdgc-sunday-IRjyLb/leaderboard/export',
         pageUrl: 'https://udisc.com/events/2025-wdgc-sunday-IRjyLb/leaderboard',
         name: '2025 WDGC Sunday',
+        courseName: 'Pittock Conservation Area',
+        location: 'Woodstock, ON, Canada',
       },
       {
         date: '2025-11-08',
@@ -26,6 +28,8 @@ describe('getEvents', () => {
         pageUrl:
           'https://udisc.com/events/ldga-weekend-league-ldga-weekend-league-finals-OkaV4J/leaderboard',
         name: 'LDGA Weekend League Finals',
+        courseName: "River's Edge at St. Julien's Park",
+        location: 'London, ON, Canada',
       },
     ])
   })
@@ -40,6 +44,8 @@ describe('getLatestEvent', () => {
         day: 'sun',
         exportUrl: null,
         pageUrl: null,
+        courseName: null,
+        location: null,
       },
       {
         name: 'Event 2',
@@ -47,6 +53,8 @@ describe('getLatestEvent', () => {
         day: 'wed',
         exportUrl: null,
         pageUrl: null,
+        courseName: null,
+        location: null,
       },
       {
         name: 'Event 3',
@@ -54,6 +62,8 @@ describe('getLatestEvent', () => {
         day: 'sat',
         exportUrl: null,
         pageUrl: null,
+        courseName: null,
+        location: null,
       },
     ]
 
