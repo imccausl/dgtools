@@ -1,5 +1,12 @@
 # @imccausl/udisc-events
 
+## 0.2.0
+
+### Minor Changes
+
+- e00c75e: adds location and course data to events data
+- 8d601f4: adds event information and leaderboard url to leaderboard data
+
 ## 0.1.0
 
 ### Minor Changes
