@@ -1,0 +1,45 @@
+{
+  "name": "@imccausl/udisc-leaderboard",
+  "description": "A leaderboad react widget that leverages UDisc's event leaderboard data",
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts"
+  },
+  "scripts": {
+    "build": "yarn workspace:build",
+    "format": "yarn workspace:format",
+    "publish": "yarn dev release",
+    "lint": "yarn workspace:lint",
+    "typecheck": "yarn workspace:typecheck",
+    "test": "yarn workspace:test"
+  },
+  "dependencies": {
+    "@imccausl/udisc-events": "*",
+    "axios": "^1.13.2"
+  },
+  "devDependencies": {
+    "@storybook/react": "^10.0.8",
+    "@tanstack/react-query": "^5.90.10",
+    "@types/jsdom": "^27",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "jsdom": "^27.2.0",
+    "msw": "^2.12.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vitest": "^4.0.10"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": ">=5",
+    "@types/react": ">=18",
+    "@types/react-dom": ">=18",
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

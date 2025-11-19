@@ -17,3 +17,6 @@ packages/*/lib
 
 #!.yarn/cache
 .pnp.*
+
+*storybook.log
+storybook-static
