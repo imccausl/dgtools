@@ -10,7 +10,7 @@ it.todo('fetches events and latest event correctly', async () => {
 
   const events = await query.events()
   expect(Array.isArray(events)).toBe(true)
-  expect(events.length).toBeGreaterThan(0)
+  expect('length' in events && events.length).toBeGreaterThan(0)
 
   const latestEvent = await query.latestEvent()
   expect(latestEvent).toBeDefined()

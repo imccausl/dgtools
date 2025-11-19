@@ -6,7 +6,7 @@ import {
   getLeaderboardPageURL,
 } from './leaderboard.js'
 
-type Event = {
+export type Event = {
   name: string
   date: string | null
   day: string | null
@@ -14,6 +14,12 @@ type Event = {
   pageUrl: string | null
   courseName: string | null
   location: string | null
+}
+
+export type ErrorResponse = {
+  error: true
+  status: number
+  message: string
 }
 
 const EVENT_LINK_SELECTOR = "a[href*='/events/']"
@@ -84,8 +90,8 @@ function getEvents(html: string, options: { query?: string } = {}): Event[] {
     .toArray()
 }
 
-function getLatestEvent(events: Event[]): Event | null {
-  if (events.length === 0) return null
+function getLatestEvent(events: Event[] | ErrorResponse): Event | null {
+  if ('error' in events || events.length === 0) return null
 
   return events.reduce((latest, event) => {
     if (!latest?.date) return event
