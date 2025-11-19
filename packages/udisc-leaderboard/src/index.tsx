@@ -57,7 +57,9 @@ export function Leaderboard() {
         </div>
         <div>
           <h2 className="udl-card__title">{event?.name}</h2>
-          <p className="udl-card__meta">{formattedEventDate}</p>
+          <p className="udl-card__meta">
+            {formattedEventDate} • {event?.courseName}
+          </p>
         </div>
       </header>
 
