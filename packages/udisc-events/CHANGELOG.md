@@ -1,5 +1,11 @@
 # @imccausl/udisc-events
 
+## 0.2.1
+
+### Patch Changes
+
+- dcc907b: returns errors as json data instead of throwing for better handling
+
 ## 0.2.0
 
 ### Minor Changes
