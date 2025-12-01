@@ -1,5 +1,5 @@
 {
-  "name": "@imccausl/udisc-events",
+  "name": "@dgtools/udisc-events",
   "description": "An interface for querying udisc event data",
   "version": "0.2.1",
   "type": "module",
