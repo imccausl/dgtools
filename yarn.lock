@@ -612,6 +612,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@dgtools/udisc-events@workspace:packages/udisc-events":
+  version: 0.0.0-use.local
+  resolution: "@dgtools/udisc-events@workspace:packages/udisc-events"
+  dependencies:
+    "@types/cheerio": "npm:^1.0.0"
+    "@types/jsdom": "npm:^27"
+    "@types/luxon": "npm:^3.7.1"
+    "@types/xlsx": "npm:^0.0.36"
+    cheerio: "npm:^1.1.2"
+    jsdom: "npm:^27.2.0"
+    luxon: "npm:^3.7.2"
+    msw: "npm:^2.12.2"
+    vitest: "npm:^4.0.10"
+    xlsx: "npm:^0.18.5"
+  languageName: unknown
+  linkType: soft
+
 "@emnapi/core@npm:^1.4.3, @emnapi/core@npm:^1.5.0":
   version: 1.7.1
   resolution: "@emnapi/core@npm:1.7.1"
@@ -1062,23 +1079,6 @@ __metadata:
   checksum: 10c0/633391c39316909723b7708ee8e85bfe64c18ba14fb13c35ab22586c20a6ecb59157ce0ea81dc2e9fae82a8341ca551b4a00f504995e6182d363d4bf631eda87
   languageName: node
   linkType: hard
-
-"@imccausl/udisc-events@workspace:packages/udisc-events":
-  version: 0.0.0-use.local
-  resolution: "@imccausl/udisc-events@workspace:packages/udisc-events"
-  dependencies:
-    "@types/cheerio": "npm:^1.0.0"
-    "@types/jsdom": "npm:^27"
-    "@types/luxon": "npm:^3.7.1"
-    "@types/xlsx": "npm:^0.0.36"
-    cheerio: "npm:^1.1.2"
-    jsdom: "npm:^27.2.0"
-    luxon: "npm:^3.7.2"
-    msw: "npm:^2.12.2"
-    vitest: "npm:^4.0.10"
-    xlsx: "npm:^0.18.5"
-  languageName: unknown
-  linkType: soft
 
 "@inquirer/ansi@npm:^1.0.2":
   version: 1.0.2

@@ -1,5 +1,11 @@
 # @imccausl/udisc-events
 
+## 0.2.2
+
+### Patch Changes
+
+- c7ca1fa: republish in @dgtools scope
+
 ## 0.2.1
 
 ### Patch Changes
