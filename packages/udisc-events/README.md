@@ -3,9 +3,11 @@
 Server-side helper for scraping public UDisc event listings and leaderboards. It wraps the event search page and leaderboard export into a small API.
 
 ## Requirements
+
 - Run in a Node.js server/runtime (fetching UDisc from the browser will fail due to CORS). Node 18+ is recommended for the built-in `fetch`.
 
 ## Installation
+
 ```bash
 npm i @imccausl/udisc-events
 # or
@@ -15,6 +17,7 @@ pnpm add @imccausl/udisc-events
 ```
 
 ## Quick start
+
 ```ts
 import { EventsQuery } from '@imccausl/udisc-events'
 
@@ -36,10 +39,13 @@ if (latest?.exportUrl) {
 ```
 
 ## API
+
 ### `new EventsQuery(query)`
+
 Creates a query against `https://udisc.com/events`.
 
 **Query options:**
+
 - `query`: free-text search term.
 - `latitude`, `longitude`, `searchRadius`: narrow results around a location (kilometer radius).
 - `quickFilter`: one of `all`, `my-events`, `trending`, `tournament`, `league`, `pdga`, `course-cleanup`, `glow`, `clinics`, `women`, `charity`.
@@ -51,12 +57,14 @@ Creates a query against `https://udisc.com/events`.
 - `startsOnOrBefore` / `endsOnOrAfter`: ISO date strings, required when `dates: 'custom'`.
 
 ### Methods
+
 - `events(): Promise<Event[] | ErrorResponse>`: Parsed events or `{ error: true, status, message }` when the request fails.
 - `latestEvent(): Promise<Event | null>`: Most recent event from the current result set (null on error or no events).
 - `leaderboard(exportUrl): Promise<Record<string, any>[] | ErrorResponse>`: Downloads the Excel export for the given event and returns rows as JSON.
 - `latestLeaderboard(): Promise<{ event: Event; leaderboard: any[] } | ErrorResponse>`: Fetches the newest event and its leaderboard in one call; returns an error object if nothing is available.
 
 **Event shape**
+
 ```ts
 {
   name: string
@@ -70,7 +78,9 @@ Creates a query against `https://udisc.com/events`.
 ```
 
 ## Example server route
+
 Use the library from a server to avoid CORS:
+
 ```ts
 import express from 'express'
 import { EventsQuery } from '@imccausl/udisc-events'
@@ -87,5 +97,6 @@ app.listen(3000)
 ```
 
 ## Notes
+
 - The library scrapes public pages; be respectful of UDisc and avoid unnecessary traffic.
 - Responses that fail network or CORS checks return an error object instead of throwing; check for `error` before using the data.
