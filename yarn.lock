@@ -595,6 +595,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dgtools/disc-defender@workspace:packages/disc-defender":
+  version: 0.0.0-use.local
+  resolution: "@dgtools/disc-defender@workspace:packages/disc-defender"
+  dependencies:
+    "@types/cheerio": "npm:^1.0.0"
+    "@types/jsdom": "npm:^27"
+    "@types/luxon": "npm:^3.7.1"
+    "@types/xlsx": "npm:^0.0.36"
+    cheerio: "npm:^1.1.2"
+    jsdom: "npm:^27.2.0"
+    luxon: "npm:^3.7.2"
+    msw: "npm:^2.12.2"
+    vitest: "npm:^4.0.10"
+    xlsx: "npm:^0.18.5"
+  languageName: unknown
+  linkType: soft
+
 "@emnapi/core@npm:^1.4.3, @emnapi/core@npm:^1.5.0":
   version: 1.7.1
   resolution: "@emnapi/core@npm:1.7.1"
@@ -2474,7 +2491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^24.10.1":
   version: 24.10.1
   resolution: "@types/node@npm:24.10.1"
   dependencies:
@@ -10505,6 +10522,7 @@ __metadata:
   dependencies:
     "@changesets/cli": "npm:^2.29.7"
     "@imccausl/dev": "npm:^2.3.0"
+    "@types/node": "npm:^24.10.1"
     "@typescript-eslint/parser": "npm:^8.46.4"
     "@yarnpkg/sdks": "npm:^3.2.3"
     eslint: "npm:^9.39.1"

@@ -1,105 +1,74 @@
-type QueryBuilderFactoryParams<T> = {
-  filters: string[]
-  params: Record<string, string>
-  queryFn: (params: Record<string, string>) => Promise<T>
+type QueryBuilderFactoryParams<
+  Item extends Record<string, unknown>,
+  Filters extends readonly string[],
+  Params extends Record<string, string>,
+> = {
+  filters: Filters
+  queryFn: (params: Params) => Promise<Item[]>
 }
 
-function createQuery<T>({
-  filters,
-  params,
-  queryFn,
-}: QueryBuilderFactoryParams<T>) {
-  class QueryBuilder implements PromiseLike<T> {
-    [key: `by${string}`]: ((value: string) => this) | undefined
-    readonly #filters: Record<string, string> = {}
-    readonly #params: Record<string, string>
+type FilterMethodName<K extends string> = `by${Capitalize<K>}`
 
-    constructor(params: Record<string, string>) {
-      this.#params = params
+type BuilderInstance<Item, FilterKey extends string> = PromiseLike<Item[]> &
+  Record<
+    FilterMethodName<FilterKey>,
+    (value: string) => BuilderInstance<Item, FilterKey>
+  >
 
-      filters.forEach((filter) => {
-        this[`by${filter.charAt(0).toUpperCase() + filter.slice(1)}`] = (
-          value: string,
-        ) => {
-          this.#filters[filter] = value
-          return this
-        }
-      })
-    }
+export function createQuery<
+  Item extends Record<string, unknown>,
+  Filters extends readonly string[],
+  Params extends Record<string, string>,
+>({ filters, queryFn }: QueryBuilderFactoryParams<Item, Filters, Params>) {
+  type FilterKey = Filters[number] & string
+  type BuilderKey = FilterMethodName<FilterKey>
+  type Builder = BuilderInstance<Item, FilterKey>
 
-    async #run() {
+  function build(params: Params): Builder {
+    const appliedFilters: Partial<Record<FilterKey, string>> = {}
+
+    const run = async () => {
       const queryResult = await queryFn(params)
       return queryResult.filter((queryItem) => {
-        return Object.entries(this.#filters).every(([key, value]) => {
-          if (value === undefined) return true
-          const discValue = (queryItem as any)[key]
-          if (typeof discValue === 'string') {
-            return discValue.toLowerCase() === value.toLowerCase()
+        return (
+          Object.entries(appliedFilters) as [FilterKey, string | undefined][]
+        ).every(([filterKey, filterValue]) => {
+          if (filterValue === undefined || filterValue === null) return true
+          const value = queryItem[filterKey]
+          if (typeof value === 'string') {
+            return value.toLowerCase() === filterValue.toLowerCase()
           }
-          return discValue === value
+          return value === filterValue
         })
       })
     }
 
-    then<TResult1 = T, TResult2 = never>(
+    const builder = {} as Builder
+
+    builder.then = <TResult1 = Item[], TResult2 = never>(
       onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | ((value: Item[]) => TResult1 | PromiseLike<TResult1>)
         | undefined
         | null,
       onrejected?:
         | ((reason: any) => TResult2 | PromiseLike<TResult2>)
         | undefined
         | null,
-    ): Promise<TResult1 | TResult2> {
-      return this.#run().then(onfulfilled, onrejected)
-    }
-  }
-
-  return QueryBuilder
-}
-
-class DiscQueryBuilder implements PromiseLike<DiscResponse[]> {
-  [key: `by${string}`]: ((value: string) => this) | undefined
-  readonly #filters: DiscFilters = {}
-  readonly #params: Params
-
-  constructor(params: Params) {
-    this.#params = params
+    ) => run().then(onfulfilled, onrejected)
 
     filters.forEach((filter) => {
-      this[`by${filter.charAt(0).toUpperCase() + filter.slice(1)}`] = (
-        value: string,
-      ) => {
-        this.#filters[filter as keyof DiscFilters] = value
-        return this
-      }
+      const methodName = `by${filter
+        .charAt(0)
+        .toUpperCase()}${filter.slice(1)}` as BuilderKey
+
+      builder[methodName] = ((value: string) => {
+        appliedFilters[filter as FilterKey] = value
+        return builder
+      }) as Builder[BuilderKey]
     })
+
+    return builder
   }
 
-  async #run() {
-    const discs = await findDiscsByAccountName(this.#params.accountName)
-    return discs.filter((disc) => {
-      return Object.entries(this.#filters).every(([key, value]) => {
-        if (value === undefined) return true
-        const discValue = (disc as any)[key]
-        if (typeof discValue === 'string') {
-          return discValue.toLowerCase() === value.toLowerCase()
-        }
-        return discValue === value
-      })
-    })
-  }
-
-  then<TResult1 = DiscResponse[], TResult2 = never>(
-    onfulfilled?:
-      | ((value: DiscResponse[]) => TResult1 | PromiseLike<TResult1>)
-      | undefined
-      | null,
-    onrejected?:
-      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-      | undefined
-      | null,
-  ): Promise<TResult1 | TResult2> {
-    return this.#run().then(onfulfilled, onrejected)
-  }
+  return build
 }
