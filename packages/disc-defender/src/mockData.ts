@@ -222,4 +222,4 @@ const mockDiscData = [
   },
 ]
 
-export { mockAccountDetailsResponse, mockAccountData }
+export { mockAccountDetailsResponse, mockAccountData, mockDiscData }
