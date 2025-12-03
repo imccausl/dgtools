@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { mockDiscData } from './mockData.js'
 import { getDiscs } from './disc.js'
+import { mockDiscData } from './mockData.js'
 
 describe('disc', () => {
   it('fetches discs for an account', async () => {
@@ -16,9 +16,7 @@ describe('disc', () => {
       color: 'pink',
     })
     const expected = mockDiscData.filter(
-      (disc) =>
-        disc.accountId === '87' &&
-        disc.color?.toLowerCase() === 'pink',
+      (disc) => disc.accountId === '87' && disc.color?.toLowerCase() === 'pink',
     )
     expect(discs).toHaveLength(expected.length)
   })

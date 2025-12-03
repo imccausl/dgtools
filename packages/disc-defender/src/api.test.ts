@@ -1,10 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import {
-  fetchAccountDetails,
-  fetchAccounts,
-  fetchDiscsDetails,
-} from './api.js'
+import { fetchAccountDetails, fetchAccounts, fetchDiscsDetails } from './api.js'
 import { mockAccountData, mockDiscData } from './mockData.js'
 
 describe('api', () => {

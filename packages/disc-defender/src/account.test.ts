@@ -23,8 +23,6 @@ describe('account', () => {
   })
 
   it('throws when no account is found', async () => {
-    await expect(findAccountDetails('nope')).rejects.toThrow(
-      /No account found/,
-    )
+    await expect(findAccountDetails('nope')).rejects.toThrow(/No account found/)
   })
 })
