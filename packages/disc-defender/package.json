@@ -1,11 +1,11 @@
 {
   "name": "@dgtools/disc-defender",
-  "description": "An interface for querying udisc event data",
+  "description": "An interface for querying disc defender data",
   "version": "0.0.1",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/imccausl/udisc.git"
+    "url": "git+https://github.com/imccausl/dgtools.git"
   },
   "files": [
     "lib"
