@@ -1,0 +1,54 @@
+{
+  "name": "@dgtools/disc-defender",
+  "description": "An interface for querying udisc event data",
+  "version": "0.0.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imccausl/udisc.git"
+  },
+  "files": [
+    "lib"
+  ],
+  "types": "lib/index.d.mts",
+  "main": "lib/index.mjs",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./lib/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.cts",
+        "default": "./lib/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "yarn workspace:build --format cjs,esm",
+    "format": "yarn workspace:format",
+    "lint": "yarn workspace:lint",
+    "typecheck": "yarn workspace:typecheck",
+    "test": "yarn workspace:test"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^1.0.0",
+    "@types/jsdom": "^27",
+    "@types/luxon": "^3.7.1",
+    "@types/xlsx": "^0.0.36",
+    "jsdom": "^27.2.0",
+    "msw": "^2.12.2",
+    "vitest": "^4.0.10"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "luxon": "^3.7.2",
+    "xlsx": "^0.18.5"
+  }
+}
