@@ -1,7 +1,7 @@
 {
   "name": "@dgtools/udisc-events",
   "description": "An interface for querying udisc event data",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "repository": {
     "type": "git",
